@@ -1,0 +1,62 @@
+---
+main:
+  params: [input]
+  steps:
+    - GetParameters:
+        call: http.post
+        args:
+          url: https://us-central1-kranio-data-lab.cloudfunctions.net/kranio-data-lab-get-parameters
+          auth:
+            type: OIDC
+          body: ${input}
+        result: parametersJson
+    - VarAssign:
+        assign:
+          - location: ${sys.get_env("GOOGLE_CLOUD_LOCATION")}
+          - projectID: ${sys.get_env("GOOGLE_CLOUD_PROJECT_ID")}
+          - stage: dev
+          - stage_arg: '--stage=dev'
+          - result_jsons: {}
+          - dataproc_formatted_date: ${parametersJson.body.dataproc_formatted_date}
+          - execution_date: ${parametersJson.body.execution_date}
+          - execution_date_arg: ${"--execution_date=" + parametersJson.body.execution_date}
+          - ingestion_date: ${parametersJson.body.pipeline_date}
+          - ingestion_date_arg: ${"--ingestion_date=" + parametersJson.body.pipeline_date}
+    - ManualFilesToRaw:
+        call: http.post
+        args:
+          url: ${"https://dataproc.googleapis.com/v1/projects/" + projectID + "/locations/" + location + "/batches/"}
+          auth:
+            type: OAuth2
+          headers:
+            Content-Type: application/json; charset=utf-8
+          query:
+            batchId: ${"ingestion-landing-to-raw" + parametersJson.body.dataproc_formatted_date}
+          body:
+            pysparkBatch:
+              args: [
+                        '${stage_arg}',
+                        '${ingestion_date_arg}',
+                        '${execution_date_arg}'
+                    ]
+              mainPythonFileUri: ${"gs://kranio-data-lab-scripts-and-configs/scripts/ingestion_landing_to_raw.py"}
+            labels: {}
+            name: ${"projects/" + projectID + "/locations/" + location + "/batches/ingestion-landing-to-raw" + parametersJson.body.dataproc_formatted_date}
+            #runtimeConfig:
+            #  version: '2.0'
+            #  containerImage: $${ location + "-docker.pkg.dev/" + projectID + "/nutrisco-" + stage + "-data-service/data-service-base:0.0.1"}
+            #  properties: {}
+            environmentConfig:
+              executionConfig:
+                subnetworkUri: default            
+        result: dataprocManualFilesToRawJson
+    #- CheckStatusManualFilesToRaw:
+    #    call: http.get
+    #    args:
+    #      url: https://us-central1-kranio-data-lab.cloudfunctions.net/datalake-dev-check-dataproc-status
+    #      auth:
+    #        type: OIDC
+    #      query:
+    #        operation_name: ${dataprocManualFilesToRawJson.body.name}
+    #      timeout: 900
+    #    result: checkStatusManualFilesToRawJson
