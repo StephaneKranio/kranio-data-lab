@@ -56,7 +56,7 @@ def clean_column_name(col_name):
     """Nettoyer un nom de colonne : supprimer les accents, mettre en majuscules, supprimer les caractères spéciaux."""
     col_name = remove_accents(col_name)   # Supprimer les accents
     col_name = re.sub(r'[^a-zA-Z0-9_]', '_', col_name)  # Remplacer les caractères non alphanumériques par _
-    col_name = col_name.upper()  # Convertir en majuscules
+    #col_name = col_name.upper()  # Convertir en majuscules
     col_name = re.sub(r'__+', '_', col_name).strip('_')  # Éliminer les doubles underscores et nettoyer les bords
     return col_name
 

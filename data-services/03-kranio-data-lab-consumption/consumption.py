@@ -71,24 +71,24 @@ def transform_data(stocks, ventes, produits, clients):
     - Realiza joins entre las tablas (ventas, productos, clientes, stocks).
     - Calcula columnas derivadas: Stock_Actuel y Chiffre_Affaires.
     """
-    ventes = ventes.withColumnRenamed("INGESTION_DATE", "INGESTION_DATE_VENTES")
-    stocks = stocks.withColumnRenamed("INGESTION_DATE", "INGESTION_DATE_STOCKS")
-    produits = produits.withColumnRenamed("INGESTION_DATE", "INGESTION_DATE_PRODUITS")
-    clients = clients.withColumnRenamed("INGESTION_DATE", "INGESTION_DATE_CLIENTS")
+    ventes = ventes.withColumnRenamed("Ingestion_date", "Ingestion_date_ventes")
+    stocks = stocks.withColumnRenamed("Ingestion_date", "Ingestion_date_stocks")
+    produits = produits.withColumnRenamed("Ingestion_date", "Ingestion_date_produits")
+    clients = clients.withColumnRenamed("Ingestion_date", "Ingestion_date_clients")
     
-    ventes = ventes.withColumnRenamed("EXECUTION_DATE", "EXECUTION_DATE_VENTES")
-    stocks = stocks.withColumnRenamed("EXECUTION_DATE", "EXECUTION_DATE_STOCKS")
-    produits = produits.withColumnRenamed("EXECUTION_DATE", "EXECUTION_DATE_PRODUITS")
-    clients = clients.withColumnRenamed("EXECUTION_DATE", "EXECUTION_DATE_CLIENTS")
+    ventes = ventes.withColumnRenamed("Execution_date", "Execution_date_ventes")
+    stocks = stocks.withColumnRenamed("Execution_date", "Execution_date_stocks")
+    produits = produits.withColumnRenamed("Execution_date", "Execution_date_produits")
+    clients = clients.withColumnRenamed("Execution_date", "Execution_date_clients")
 
     # Joins entre las tablas
-    ventes_produits_df = ventes.join(produits, on=["ID_PRODUIT", "INGESTION_DAY", "INGESTION_MONTH", "INGESTION_YEAR"], how="left")
-    ventes_produits_clients_df = ventes_produits_df.join(clients, on=["ID_CLIENT", "INGESTION_DAY", "INGESTION_MONTH", "INGESTION_YEAR"], how="left")
-    table_finale_df = ventes_produits_clients_df.join(stocks, on=["ID_PRODUIT", "INGESTION_DAY", "INGESTION_MONTH", "INGESTION_YEAR"], how="left")
+    ventes_produits_df = ventes.join(produits, on=["ID_Produit", "Ingestion_day", "Ingestion_month", "Ingestion_year"], how="left")
+    ventes_produits_clients_df = ventes_produits_df.join(clients, on=["ID_Client", "Ingestion_day", "Ingestion_month", "Ingestion_year"], how="left")
+    table_finale_df = ventes_produits_clients_df.join(stocks, on=["ID_Produit", "Ingestion_day", "Ingestion_month", "Ingestion_year"], how="left")
 
     # Calcular columnas derivadas
-    table_finale_df = table_finale_df.withColumn("STOCK_ACTUEL", col("QUANTITE_EN_STOCK") - col("QUANTITE_VENDUE"))
-    table_finale_df = table_finale_df.withColumn("CHIFFRE_AFFAIRES", col("QUANTITE_VENDUE") * col("PRIX_UNITAIRE"))
+    table_finale_df = table_finale_df.withColumn("Stock_Actuel", col("Quantite_En_Stock") - col("Quantite_Vendue"))
+    table_finale_df = table_finale_df.withColumn("Chiffre_Affaires", col("Quantite_Vendue") * col("Prix_Unitaire"))
 
     table_finale_df.printSchema()
     return table_finale_df

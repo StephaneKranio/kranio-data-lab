@@ -22,13 +22,13 @@ def cast_columns(df):
     for column_name in df.columns:
         df = df.withColumn(column_name, trim(col(column_name)))  # Eliminar espacios
         
-        if 'DATE' in column_name.lower():
+        if 'date' in column_name.lower():
             df = df.withColumn(column_name, regexp_replace(col(column_name), '[^0-9-]', ''))  # Mantener números y '-'
             df = df.withColumn(column_name, to_date(col(column_name), 'dd-MM-yyyy'))
-        elif 'PRIX' in column_name.lower() or 'montant' in column_name.lower():
+        elif 'prix' in column_name.lower() or 'montant' in column_name.lower():
             df = df.withColumn(column_name, regexp_replace(col(column_name), '[^0-9.]', ''))
             df = df.withColumn(column_name, col(column_name).cast(FloatType()))
-        elif 'QUANTITE' in column_name.lower() or 'nombre' in column_name.lower():
+        elif 'quantite' in column_name.lower() or 'nombre' in column_name.lower():
             df = df.withColumn(column_name, regexp_replace(col(column_name), '[^0-9]', ''))
             df = df.withColumn(column_name, col(column_name).cast(IntegerType()))
     
@@ -55,10 +55,10 @@ def add_ingestion_columns(df):
     - Año, mes y día de ingestión.
     """
     current_date_ingestion = datetime.now()
-    df = df.withColumn('INGESTION_DATE', lit(current_date_ingestion.strftime('%Y-%m-%d')))
-    df = df.withColumn('INGESTION_YEAR', lit(current_date_ingestion.year))
-    df = df.withColumn('INGESTION_MONTH', lit(current_date_ingestion.month))
-    df = df.withColumn('INGESTION_DAY', lit(current_date_ingestion.day))
+    df = df.withColumn('Ingestion_date', lit(current_date_ingestion.strftime('%Y-%m-%d')))
+    df = df.withColumn('Ingestion_year', lit(current_date_ingestion.year))
+    df = df.withColumn('Ingestion_month', lit(current_date_ingestion.month))
+    df = df.withColumn('Ingestion_day', lit(current_date_ingestion.day))
     return df
 
 # Función para rellenar valores nulos
