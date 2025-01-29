@@ -1,0 +1,11 @@
+image: python:3.8
+
+pipelines:
+  default:
+    - step:
+        name: Pre-commit checks
+        script:
+          - pip install --upgrade pip
+          - pip install pre-commit
+          - pre-commit install
+          - pre-commit run --all-files
