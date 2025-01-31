@@ -1,0 +1,76 @@
+#name: Deploy
+#
+#on:
+#  push:
+#    branches:
+#      - Feat/cicd
+#      - master
+#      - development
+#  pull_request:
+#    branches:
+#      - master
+#      - development
+#
+#jobs:
+#
+#  deploy:
+#    runs-on: ubuntu-latest
+#    env: 
+#      envir: steph-dev
+#
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v4
+#
+#      - name: Set up Python
+#        uses: actions/setup-python@v5
+#        with:
+#          python-version: 3.12
+#
+#      - name: Install dependencies
+#        run: pip install importlib-metadata==4.8.3 types-pkg-resources==0.1.3
+#      
+#      - name: Display custom environment variables
+#        run: echo ${{ env.envi }}
+#
+#      - name: zip
+#        run: python3 __cicd__/conversion_to_zip_file.py 
+#      
+#      - name: Upload artifact
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: format-prompt-cb.zip
+#          path: infraestructure/terraform/cloud-fonctions-files/${{ env.envi }}/format-prompt-cb.zip
+#
+#      - name: Upload artifact
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: get-model-response.zip
+#          path: infraestructure/terraform/cloud-fonctions-files/${{ env.envi }}/get-model-response.zip
+#
+#      - name: Upload artifact
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: get-request.zip
+#          path: infraestructure/terraform/cloud-fonctions-files/${{ env.envi }}/get-request.zip
+#
+#      #- name: Install Terraform
+#      #  uses: hashicorp/setup-terraform@v2
+#
+      #- name: Terraform Init
+      #  working-directory: 'infraestructure/terraform'
+      #  run: terraform init
+#
+      #- name: Terraform Plan
+      #  working-directory: 'infraestructure/terraform'
+      #  run: terraform plan
+#
+      #- name: Terraform Destroy
+      #  working-directory: 'infraestructure/terraform'
+      #  run: terraform destroy
+#
+      #- name: Terraform Apply
+      #  working-directory: 'infraestructure/terraform'
+      #  run: terraform apply -auto-approve -input=false
+
+ 
