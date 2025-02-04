@@ -62,7 +62,7 @@ jobs:
         run: echo $GOOGLE_APPLICATION_CREDENTIALS
 
       - name: Verify credentials file
-        run: ls -lah $HOME && cat $HOME/kranio-data-lab-b46e531119a7.json | head -n 5
+        run: ls -lah $HOME && cat $HOME/kranio-data-lab-b46e531119a7.json | head -n 5 
 
       - name: Terraform Init
         working-directory: 'infraestructure/terraform'
