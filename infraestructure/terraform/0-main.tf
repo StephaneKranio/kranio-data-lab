@@ -7,9 +7,13 @@ terraform {
   }
 }
 
+#provider "google" {
+#  project = "kranio-data-lab"
+#  credentials = file("credentials/kranio-data-lab-b46e531119a7.json")
+
 provider "google" {
   project = "kranio-data-lab"
-  credentials = file("credentials/kranio-data-lab-b46e531119a7.json")
+  credentials = file("kranio-data-lab-b46e531119a7.json")
 
 
   region  = "us-central1"
