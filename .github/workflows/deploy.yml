@@ -61,13 +61,13 @@ jobs:
 
       - name: Terraform Plan
         working-directory: 'infraestructure/terraform'
-        run: terraform plan    
+        run: terraform plan -var="credentials=kranio-data-lab-b46e531119a7.json"   
 
       - name: Terraform Destroy
         working-directory: 'infraestructure/terraform'
-        run: terraform destroy
+        run: terraform destroy -var="credentials=kranio-data-lab-b46e531119a7.json"   
 
       - name: Terraform Apply
         working-directory: 'infraestructure/terraform'
-        run: terraform apply -auto-approve -input=false
+        run: terraform apply -auto-approve -input=false -var="credentials=kranio-data-lab-b46e531119a7.json"   
  
