@@ -55,6 +55,9 @@ jobs:
       - name: Set up Google Cloud credentials
         run: printf '%s' "${{ secrets.GCP_CREDENTIALS }}" > $HOME/kranio-data-lab-b46e531119a7.json
 
+      - name: Fix JSON Formatting
+        run: echo '${{ secrets.GCP_CREDENTIALS }}' | tr -d '\\' | sed 's/n/\n/g' > $HOME/kranio-data-lab-b46e531119a7.json
+
       - name: Export Google Credentials
         run: printf '%s' "GOOGLE_APPLICATION_CREDENTIALS=$HOME/kranio-data-lab-b46e531119a7.json" >> $GITHUB_ENV
 
