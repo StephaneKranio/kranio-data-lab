@@ -79,7 +79,7 @@ resource "google_storage_bucket" "function_bucket" {
 
 ############################## Buckets terraform #####################################
 
-#resource "google_storage_bucket" "terraform_state" {
-#    name     = "nutrisco-state"
-#    location = var.region
-#}
+resource "google_storage_bucket" "terraform_state" {
+    name     = "kranio-data-lab-terraform-state"
+    location = var.region
+}

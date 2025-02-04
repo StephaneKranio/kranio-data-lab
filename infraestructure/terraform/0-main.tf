@@ -1,11 +1,11 @@
-terraform {
-  required_providers {
-    google = {
-      source = "hashicorp/google"
-      version = "4.51.0"
-    }
-  }
-}
+#terraform {
+#  required_providers {
+#    google = {
+#      source = "hashicorp/google"
+#      version = "4.51.0"
+#    }
+#  }
+#}
 
 
 provider "google" {}
@@ -18,9 +18,9 @@ provider "google" {}
 #  zone    = "us-central1-c"
 #}
 
-#terraform {
-#  backend "gcs" {
-#    bucket  = "kranio-data-lab-state-terraform"
-#    prefix  = "terraform/state"
-#  }
-#}
+terraform {
+  backend "gcs" {
+    bucket  = "kranio-data-lab-terraform-state"
+    prefix  = "terraform/state"
+  }
+}
