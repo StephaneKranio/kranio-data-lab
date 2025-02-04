@@ -55,19 +55,22 @@ jobs:
       - name: Set up Google Cloud credentials
         run: echo "${{ secrets.GCP_CREDENTIALS }}" > kranio-data-lab-b46e531119a7.json
 
+      - name: Export Google Credentials
+        run: echo "GOOGLE_APPLICATION_CREDENTIALS=kranio-data-lab-b46e531119a7.json" >> $GITHUB_ENV
+
       - name: Terraform Init
         working-directory: 'infraestructure/terraform'
         run: terraform init    
 
       - name: Terraform Plan
         working-directory: 'infraestructure/terraform'
-        run: terraform plan -var="credentials=kranio-data-lab-b46e531119a7.json"   
+        run: terraform plan 
 
       - name: Terraform Destroy
         working-directory: 'infraestructure/terraform'
-        run: terraform destroy -var="credentials=kranio-data-lab-b46e531119a7.json"   
+        run: terraform destroy 
 
       - name: Terraform Apply
         working-directory: 'infraestructure/terraform'
-        run: terraform apply -auto-approve -input=false -var="credentials=kranio-data-lab-b46e531119a7.json"   
+        run: terraform apply -auto-approve -input=false 
  
