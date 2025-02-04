@@ -52,6 +52,9 @@ jobs:
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
 
+      - name: Set up Google Cloud credentials
+        run: echo "${{ secrets.GCP_CREDENTIALS }}" > credentials/kranio-data-lab-b46e531119a7.json
+
       - name: Terraform Init
         working-directory: 'infraestructure/terraform'
         run: terraform init    
