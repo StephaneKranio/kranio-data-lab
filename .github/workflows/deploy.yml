@@ -53,19 +53,19 @@ jobs:
         uses: hashicorp/setup-terraform@v2
 
       - name: Set up Google Cloud credentials
-        run: echo "${{ secrets.GCP_CREDENTIALS }}" > $HOME/kranio-data-lab-b46e531119a7.json
-
-      - name: Validate JSON
-        run: cat $HOME/kranio-data-lab-b46e531119a7.json | jq .
+        run: printf '%s' "${{ secrets.GCP_CREDENTIALS }}" > $HOME/kranio-data-lab-b46e531119a7.json
 
       - name: Export Google Credentials
-        run: echo "GOOGLE_APPLICATION_CREDENTIALS=$HOME/kranio-data-lab-b46e531119a7.json" >> $GITHUB_ENV
+        run: printf '%s' "GOOGLE_APPLICATION_CREDENTIALS=$HOME/kranio-data-lab-b46e531119a7.json" >> $GITHUB_ENV
 
       - name: Check environment variable
-        run: echo $GOOGLE_APPLICATION_CREDENTIALS 
+        run: printf '%s' $GOOGLE_APPLICATION_CREDENTIALS 
 
       - name: Verify credentials file
         run: ls -lah $HOME && cat $HOME/kranio-data-lab-b46e531119a7.json | head -n 5
+
+      - name: Validate JSON
+        run: cat $HOME/kranio-data-lab-b46e531119a7.json | jq .
 
       - name: Terraform Init
         working-directory: 'infraestructure/terraform'
