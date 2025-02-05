@@ -80,7 +80,7 @@ jobs:
 
       - name: Terraform Destroy
         working-directory: 'infraestructure/terraform'
-        run: terraform destroy 
+        run: terraform destroy -auto-approve -input=false
 
       - name: Terraform Apply
         working-directory: 'infraestructure/terraform'
