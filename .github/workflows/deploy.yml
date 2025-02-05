@@ -74,7 +74,7 @@ jobs:
         working-directory: 'infraestructure/terraform'
         run: terraform init    
 
-      - name: Terraform Plan
+      - name: Terraform Plan 
         working-directory: 'infraestructure/terraform'
         run: terraform plan 
 
