@@ -78,9 +78,9 @@ jobs:
         working-directory: 'infraestructure/terraform'
         run: terraform plan 
 
-      - name: Terraform Destroy
-        working-directory: 'infraestructure/terraform'
-        run: terraform destroy -auto-approve -input=false
+      #- name: Terraform Destroy
+      #  working-directory: 'infraestructure/terraform'
+      #  run: terraform destroy -auto-approve -input=false
 
       - name: Terraform Apply
         working-directory: 'infraestructure/terraform'
