@@ -87,7 +87,7 @@ override.tf.json
 terraform.rc
 data-services
 #__cicd__
-*.zip
+#*.zip
 .terraform
-cloud-functions-files
+#cloud-functions-files
 infraestructure/terraform/credentials/*.json
