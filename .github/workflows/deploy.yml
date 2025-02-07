@@ -48,7 +48,9 @@ jobs:
           name: check_dataproc-status.zip
           path: infraestructure/terraform/cloud-fonctions-files/check_dataproc-status.zip
 
-
+      - name: Debug - Check file existence
+        run: ls -lR infraestructure/terraform/cloud-fonctions-files/
+        
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
 
