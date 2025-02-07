@@ -53,13 +53,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: check_dataproc-status.zip
-          path: terraform/cloud-functions-files/get_parameters.zip
-          
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: check_dataproc-status.zip
-          path: terraform/cloud-functions-files/check_dataproc-status.zip
+          path: terraform/cloud-functions-files/
 
       - name: Debug - Check current directory
         run: pwd
