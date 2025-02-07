@@ -3,7 +3,7 @@ resource "google_storage_bucket_object" "check_dataproc_status" {
     name         = "kranio-data-lab-check-dataproc-status"
     bucket       = google_storage_bucket.function_bucket.name
     content_type = "application/zip"
-    source       = "terraform/cloud-functions-files/check_dataproc-status.zip"
+    source       = "cloud-functions-files/check_dataproc-status.zip"
 }
 
 resource "google_cloudfunctions2_function" "check_dataproc_status_function2" {
@@ -41,7 +41,7 @@ resource "google_storage_bucket_object" "get_parameters_function" {
     name         = "kranio-data-lab-get-parameters"
     bucket       = google_storage_bucket.function_bucket.name
     content_type = "application/zip"
-    source       = "terraform/cloud-functions-files/get_parameters.zip"
+    source       = "cloud-functions-files/get_parameters.zip"
 }
 
 resource "google_cloudfunctions2_function" "get_parameters_function2" {
