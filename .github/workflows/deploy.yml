@@ -35,6 +35,11 @@ jobs:
 
       - name: zip
         run: python3 ./infraestructure/__cicd__/conversion_to_zip_file.py
+
+      - name: Générer le ZIP de la Cloud Function
+        run: |
+          cd infraestructure/__cicd__/
+          python conversion_to_zip_file.py
       
       - name: Upload artifact
         uses: actions/upload-artifact@v4
