@@ -40,22 +40,22 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: get_parameters.zip
-          path: infraestructure/terraform/cloud-fonctions-files/get_parameters.zip
+          path: infraestructure/terraform/cloud-functions-files/get_parameters.zip
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: check_dataproc-status.zip
-          path: infraestructure/terraform/cloud-fonctions-files/check_dataproc-status.zip
+          path: infraestructure/terraform/cloud-functions-files/check_dataproc-status.zip
 
       - name: Debug - Check current directory
         run: pwd
 
       - name: Debug - List all files
         run: ls -lR  
-        
+
       - name: Debug - Check file existence
-        run: ls -lR infraestructure/terraform/cloud-fonctions-files/check_dataproc-status.zip 
+        run: ls -lR infraestructure/terraform/cloud-functions-files/check_dataproc-status.zip 
 
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
