@@ -69,6 +69,10 @@ jobs:
       - name: Debug - Check file existence
         run: ls -lR terraform/cloud-functions-files/check_dataproc-status.zip 
 
+      - name: Vérifier le contenu du ZIP
+        run: unzip -l terraform/cloud-functions-files/check_dataproc-status.zip
+
+
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
 
