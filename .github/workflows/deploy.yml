@@ -34,23 +34,23 @@ jobs:
       #  run: echo ${{ env.envi }}
 
       - name: zip
-        run: python3 infraestructure/__cicd__/conversion_to_zip_file.py
+        run: python3 ../infraestructure/__cicd__/conversion_to_zip_file.py
       
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: get_parameters.zip
-          path: infraestructure/terraform/cloud-fonctions-files/get_parameters.zip
+          path: ../infraestructure/terraform/cloud-fonctions-files/get_parameters.zip
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: check_dataproc-status.zip
-          path: infraestructure/terraform/cloud-fonctions-files/check_dataproc-status.zip
+          path: ../infraestructure/terraform/cloud-fonctions-files/check_dataproc-status.zip
 
       - name: Debug - Check file existence
-        run: ls -lR infraestructure/terraform/cloud-fonctions-files/
-        
+        run: ls -lR ../infraestructure/terraform/cloud-fonctions-files/check_dataproc-status.zip 
+
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
 
@@ -73,18 +73,18 @@ jobs:
         run: cat $HOME/kranio-data-lab-b46e531119a7.json | jq .
 
       - name: Terraform Init
-        working-directory: 'infraestructure/terraform'
+        working-directory: '../infraestructure/terraform'
         run: terraform init    
 
       - name: Terraform Plan 
-        working-directory: 'infraestructure/terraform'
+        working-directory: '../infraestructure/terraform'
         run: terraform plan 
 
       #- name: Terraform Destroy
-      #  working-directory: 'infraestructure/terraform'
+      #  working-directory: '../infraestructure/terraform'
       #  run: terraform destroy -auto-approve -input=false
 
       - name: Terraform Apply
-        working-directory: 'infraestructure/terraform'
+        working-directory: '../infraestructure/terraform'
         run: terraform apply -auto-approve -input=false
  
