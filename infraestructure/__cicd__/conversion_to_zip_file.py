@@ -7,7 +7,7 @@ from pathlib import Path
 
 origin_path_source_prd = '../../data-services'
 commons_path_source = "04-cloud_functions"
-origin_path_output = f'terraform/cloud-functions-files'
+origin_path_output = f'../terraform/cloud-functions-files'
 path = Path(origin_path_output)
 path.mkdir(parents=True, exist_ok=True)
 
