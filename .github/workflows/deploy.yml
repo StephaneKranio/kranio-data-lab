@@ -54,10 +54,16 @@ jobs:
           path: terraform/cloud-functions-files/check_dataproc-status.zip
 
 
-      - name: Download artifact
+      - name: Download artifact check_dataproc-status
         uses: actions/download-artifact@v4
         with:
           name: check_dataproc-status.zip
+          path: infraestructure/terraform/cloud-functions-files/
+      
+      - name: Download artifact get_parameters
+        uses: actions/download-artifact@v4
+        with:
+          name: get_parameters.zip
           path: infraestructure/terraform/cloud-functions-files/
 
       - name: Debug - Check current directory
@@ -72,6 +78,8 @@ jobs:
       - name: Vérifier le contenu du ZIP
         run: unzip -l terraform/cloud-functions-files/check_dataproc-status.zip
 
+      - name: Vérifier le contenu du ZIP
+        run: unzip -l terraform/cloud-functions-files/get_parameters.zip
 
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
