@@ -12,7 +12,6 @@ path = Path(origin_path_output)
 path.mkdir(parents=True, exist_ok=True)
 
 
-
 def zip_files(source_dir, output_zip):
     main_py_path = os.path.join(source_dir, 'main.py')
     requirements_txt_path = os.path.join(source_dir, 'requirements.txt')
