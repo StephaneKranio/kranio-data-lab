@@ -29,6 +29,7 @@ resource "google_workflows_workflow" "processing" {
 
 resource "google_workflows_workflow" "consumption" {
   name          = "workflow-kranio-data-lab-consumption-manual-files"
+  project       = var.project_id
   region        = "us-central1"
   description   = ""
   #service_account = google_service_account.test_account.account_id
