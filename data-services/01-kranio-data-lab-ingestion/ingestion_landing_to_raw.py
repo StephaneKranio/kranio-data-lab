@@ -84,16 +84,16 @@ def process_table(input_path, output_path, sep, encoding, ingestion_date, execut
     # Ajout des colonnes d'ingestion et d'exécution
     logging.info("Ajout des colonnes d'ingestion et d'exécution.")
     df = (df
-          .withColumn('INGESTION_DATE', F.lit(ingestion_date))
-          .withColumn('EXECUTION_DATE', F.lit(execution_date))
-          .withColumn('INGESTION_YEAR', F.year(F.lit(ingestion_date)))
-          .withColumn('INGESTION_MONTH', F.month(F.lit(ingestion_date)))
-          .withColumn('INGESTION_DAY', F.dayofmonth(F.lit(ingestion_date))))
+          .withColumn('Ingestion_date', F.lit(ingestion_date))
+          .withColumn('Execution_date', F.lit(execution_date))
+          .withColumn('Ingestion_year', F.year(F.lit(ingestion_date)))
+          .withColumn('Ingestion_month', F.month(F.lit(ingestion_date)))
+          .withColumn('Ingestion_day', F.dayofmonth(F.lit(ingestion_date))))
 
     # Sauvegarde des données
     logging.info(f"Écriture des données transformées dans {output_path}")
     (df.write
-     .partitionBy('INGESTION_YEAR', 'INGESTION_MONTH', 'INGESTION_DAY')
+     .partitionBy('Ingestion_year', 'Ingestion_month', 'Ingestion_day')
      .mode('overwrite')
      .parquet(output_path))
 
