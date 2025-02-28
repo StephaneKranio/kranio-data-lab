@@ -60,6 +60,7 @@ def clean_column_name(col_name):
     col_name = re.sub(r'__+', '_', col_name).strip('_')  # Éliminer les doubles underscores et nettoyer les bords
     return col_name
 
+
 def clean_dataframe(df):
     """Appliquer les transformations de base sur un DataFrame Spark."""
     # Nettoyer les noms de colonnes
