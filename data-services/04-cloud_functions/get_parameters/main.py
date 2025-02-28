@@ -19,6 +19,10 @@ def get_pipeline_date(request):
     return pipeline_date
 
 
+
+
+
+
 def main(request):
     pipeline_date = get_pipeline_date(request)
     execution_date = current_date.strftime('%Y-%m-%d %H:%M:%S')
