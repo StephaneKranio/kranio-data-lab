@@ -68,3 +68,17 @@ resource "google_cloudfunctions2_function" "get_parameters_function2" {
         timeout_seconds     = 900
     }
 } 
+
+resource "google_cloud_run_service_iam_member" "public_access" {
+    # Cible le service Cloud Run sous-jacent à la Cloud Function V2
+    service  = google_cloudfunctions2_function.get_parameters_function2.name
+    location = google_cloudfunctions2_function.get_parameters_function2.location
+    role     = "roles/run.invoker" 
+    member   = "allUsers" # Permet l'accès non authentifié
+}
+
+output "get_parameters_function_url" {
+    description = "L'URL HTTP de la Cloud Function V2"
+    # L'URL est stockée dans l'attribut service_config.uri de la ressource.
+    value       = google_cloudfunctions2_function.get_parameters_function2.service_config[0].uri
+}
