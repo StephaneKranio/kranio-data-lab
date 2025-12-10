@@ -30,7 +30,7 @@ ingestion_metadata = {
         'encoding': 'UTF-8',
     },
     'ventes': {
-        'input_file': 'ventes.csv',
+        'input_file': 'ventes_vendredi.csv',
         'output_path': 'ventes',
         'sep': ',',
         'encoding': 'UTF-8',
