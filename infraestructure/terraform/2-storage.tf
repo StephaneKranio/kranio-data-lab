@@ -54,6 +54,7 @@ resource "google_storage_bucket_object" "scripts_ingestion" {
 }
 
 
+
 resource "google_storage_bucket_object" "scripts_processing" {
   name   = "scripts/processing.py"
   bucket = google_storage_bucket.kranio_data_lab_scripts_and_configs.name
