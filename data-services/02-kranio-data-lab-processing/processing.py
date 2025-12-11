@@ -90,7 +90,7 @@ def write_to_processing(df, table_name, bucket_name, path):
     """
     Escribe las tablas transformadas en el bucket de la zona de procesamiento (processing).
     """
-    df.write.mode("overwrite").parquet(f"gs://{bucket_name}/{path}/{table_name}")
+    df.write.mode("overwrite").option('partitionOverwriteMode', 'dynamic').parquet(f"gs://{bucket_name}/{path}/{table_name}")
 
 # Función principal para procesar y concatenar tablas
 def process_and_concat_tables(raw_bucket, processing_bucket, raw_path, processing_path):
