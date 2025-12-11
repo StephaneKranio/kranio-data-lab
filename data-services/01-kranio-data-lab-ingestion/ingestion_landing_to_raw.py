@@ -96,6 +96,7 @@ def process_table(input_path, output_path, sep, encoding, ingestion_date, execut
     (df.write
      .partitionBy('Ingestion_year', 'Ingestion_month', 'Ingestion_day')
      .mode('overwrite')
+     .option('partitionOverwriteMode', 'dynamic')
      .parquet(output_path))
 
 def main():
