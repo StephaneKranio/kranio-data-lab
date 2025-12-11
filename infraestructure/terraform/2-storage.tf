@@ -10,7 +10,7 @@ resource "google_storage_bucket" "kranio_data_lab_ingestion" {
 resource "google_storage_bucket_object" "ventes" {
   name   = "landing-zone/ventes.csv"
   bucket = google_storage_bucket.kranio_data_lab_ingestion.name
-  source = "data/ventes.csv"
+  source = "data/ventes_14_10.csv"
 }
 resource "google_storage_bucket_object" "clients" {
   name   = "landing-zone/clients.csv"
